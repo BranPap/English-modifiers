@@ -10,7 +10,8 @@ function shuffleArray(array) {
 
 // Preliminary Calls //
 const jsPsych = initJsPsych({
-  auto_update_progress_bar: false,
+  show_progress_bar: true,
+  auto_update_progress_bar: true,
   on_finish: function(data) {
     proliferate.submit({ trials: data.values() });
     // jsPsych.data.displayData('csv');
@@ -38,70 +39,89 @@ const irb = {
 timeline.push(irb);
 
 
+var stims = generateStimuli();
 
-
+// Shuffle stimuli
+stims = shuffleArray(stims);
 
 
 const trial_3 = {
-  type: jsPsychLikertStim,
-  stimulus: 'Jim says to his friend Tanya: "I had a hamburger last night for dinner. <br><strong>It was pretty good</strong>".',
-  prompt: 'Please read the following prompt, then answer each of the questions below:',
-  questions: [
-      { text: 'How good does Jim think the hamburger is?', name: 'valence' },
-      { text: 'How natural does the bolded part of the sentence sound to you?', name: 'natural' },
-      { text: 'How formal does the bolded part of the sentence sound to you?', name: 'formality' },
-      { text: 'How mature do you think Jim is?', name: 'maturity' },
-      { text: 'How cool do you think Jim is?', name: 'coolness' },
-      { text: 'How articulate do you think Jim is?', name: 'articulateness' },
-      { text: 'How old do you think Jim is?', name: 'age' },
-      { text: 'How friendly do you think Jim is?', name: 'friendliness' }
-
+  timeline: [
+    {
+      type: jsPsychLikertStim,
+      stimulus: jsPsych.timelineVariable('stimulus'),
+      questions: jsPsych.timelineVariable('questions'),
+      scale_min: 1,
+      scale_max: 7,
+      randomize_question_order: true,
+      prompt: `Please read the following prompt and answer each of the questions below`,
+      question_labels: function() {
+        var q_labels = {
+          valence: {
+            right: `Extremely ${jsPsych.timelineVariable('adjective')}</strong>`,
+            center: 'Somewhat',
+            left: `Not at all ${jsPsych.timelineVariable('adjective')}</strong>`
+          },
+          formality: {
+            left: 'Very informal',
+            center: 'Neutral',
+            right: 'Very formal'
+          },
+          maturity: {
+            right: 'Very mature',
+            center: 'Somewhat mature',
+            left: 'Not at all mature'
+          },
+          coolness: {
+            right: 'Very cool',
+            center: 'Somewhat cool',
+            left: 'Not at all cool'
+          },
+          articulateness: {
+            right: 'Very articulate',
+            center: 'Somewhat articulate',
+            left: 'Not at all articulate'
+          },
+          age: {
+            left: 'Very young',
+            center: 'Middle-aged',
+            right: 'Very old'
+          },
+          friendliness: {
+            right: 'Very friendly',
+            center: 'Somewhat friendly',
+            left: 'Not at all friendly'
+          },
+          certainty: {
+            right: 'Very certain',
+            center: 'Somewhat certain',
+            left: 'Not at all certain'
+          },
+          natural: {
+            right: 'Very natural',
+            center: 'Somewhat natural',
+            left: 'Not at all natural' 
+          }
+      }
+      return q_labels;
+      },
+      data: {
+        category: "mainTrial",
+        name1: jsPsych.timelineVariable('name1'),
+        name2: jsPsych.timelineVariable('name2'),
+        modifier: jsPsych.timelineVariable('modifier'),
+        adjective: jsPsych.timelineVariable('adjective'),
+        object: jsPsych.timelineVariable('object'),
+        frame: jsPsych.timelineVariable('frame'),
+        frame_type: jsPsych.timelineVariable('frame_type')
+      },
+      on_finish: function(data) {
+        console.log(data);
+      }
+    }
   ],
-  // Default labels that apply unless overridden
-  scale_labels: {
-      left: 'Not at all natural',
-      center: 'Somewhat',
-      right: 'Very natural'
-  },
-  // Question-specific labels override defaults
-  question_labels: {
-      valence: {
-          left: 'Extremely bad',
-          center: 'Fine',
-          right: 'Extremely good'
-      },
-      formality: {
-          left: 'Very informal',
-          center: 'Neutral',
-          right: 'Very formal'
-      },
-      maturity: {
-        left: 'Very mature',
-        center: 'Somewhat mature',
-        right: 'Not at all mature'
-    },
-    coolness: {
-      left: 'Very cool',
-      center: 'Somewhat cool',
-      right: 'Not at all cool'
-  },
-  articulateness: {
-    left: 'Very articulate',
-    center: 'Somewhat articulate',
-    right: 'Not at all articulate'
-  },
-  age: {
-    left: 'Very young',
-    center: 'Middle-aged',
-    right: 'Very old'
-  },
-  friendliness: {
-    left: 'Very friendly',
-    center: 'Somewhat friendly',
-    right: 'Not at all friendly'
-  }
-      // 'agreement' will use the default scale_labels
-  }
+  timeline_variables: stims,
+  randomize_order: true
 };
 
 timeline.push(trial_3);
