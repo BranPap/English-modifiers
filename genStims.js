@@ -1,5 +1,5 @@
 function generateStimuli() {
-    const modifiers = ["pretty", "fairly", "very", "so", "really", "truly"];
+    const modifiers = ["pretty", "fairly", "very", "so", "really", "truly", ""];
     const names = ["Jim", "Bob", "Alice", "Samantha", "Tom", "Jessica", "Karen", "Michael", "Sarah", "David", "Emily", "Daniel", "Jose", "Maria", "Belinda", "Chanel", "Chris", "Jerome"];
     const buildings = ["restaurant", "library", "museum", "theater", "zoo", "bar"];
     const meals = ["burger", "pizza", "pasta", "seafood", "sushi", "dumpling"];
@@ -40,11 +40,11 @@ function generateStimuli() {
     const namePairs1 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs1[i][0]} is telling ${namePairs1[i][1]} about a new restaurant in town and says: "The burger I had last night was <strong>${modifiers1[i]} ${tasteAdj1[i]}</strong>."`,
+        stimulus: `${namePairs1[i][0]} is telling ${namePairs1[i][1]} about a new restaurant in town and says: "The burger I had last night was ${modifiers1[i]} ${tasteAdj1[i]}."`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
         questions: [
           { text: `How ${tasteAdj1[i]} does ${namePairs1[i][0]} think the burger is?`, name: 'valence' },
-          { text: 'How natural does the bolded part of the sentence sound to you?', name: 'natural' },
+          { text: `How natural does ${namePairs1[i][0]}'s sentence sound to you?`, name: 'natural' },
           { text: 'How formal does the bolded part of the sentence sound to you?', name: 'formality' },
           { text: `How mature do you think ${namePairs1[i][0]} is?`, name: 'maturity' },
           { text: `How cool do you think ${namePairs1[i][0]} is?`, name: 'coolness' },
@@ -70,7 +70,7 @@ function generateStimuli() {
     const namePairs2 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs2[i][0]} is telling ${namePairs2[i][1]} about a recent meal at a new ${meals2[i]} place and says: "The meal I had at the ${meals2[i]} place was <strong>${modifiers2[i]} ${tasteAdj2[i]}</strong>."`,
+        stimulus: `${namePairs2[i][0]} is telling ${namePairs2[i][1]} about a recent meal at a new ${meals2[i]} place and says: "The meal I had at the ${meals2[i]} place was ${modifiers2[i]} ${tasteAdj2[i]}."`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
         questions: [
           { text: `How ${tasteAdj2[i]} does ${namePairs2[i][0]} think the meal is?`, name: 'valence' },
@@ -100,7 +100,7 @@ function generateStimuli() {
     const namePairs3 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs3[i][0]} is recounting to ${namePairs3[i][1]} a recent date and says: "The food I ordered at the ${meals3[i]} place was <strong>${modifiers3[i]} ${tasteAdj3[i]}</strong>."`,
+        stimulus: `${namePairs3[i][0]} is recounting to ${namePairs3[i][1]} a recent date and says: "The food I ordered at the ${meals3[i]} place was ${modifiers3[i]} ${tasteAdj3[i]}."`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
         questions: [
           { text: `How ${tasteAdj3[i]} does ${namePairs3[i][0]} think the food is?`, name: 'valence' },
@@ -130,7 +130,7 @@ function generateStimuli() {
     const namePairs4 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs4[i][0]} is telling ${namePairs4[i][1]} about the new ${buildings4[i]} in town and says: "I went and saw the new ${buildings4[i]} last night and it is <strong>${modifiers4[i]} ${sizeOrAesthetic4[i]}</strong>."`,
+        stimulus: `${namePairs4[i][0]} is telling ${namePairs4[i][1]} about the new ${buildings4[i]} in town and says: "I went and saw the new ${buildings4[i]} last night and it is ${modifiers4[i]} ${sizeOrAesthetic4[i]}."`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
         questions: [
           { text: `How ${sizeOrAesthetic4[i]} does ${namePairs4[i][0]} think the ${buildings4[i]} is?`, name: 'valence' },
@@ -160,7 +160,7 @@ function generateStimuli() {
     const namePairs5 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs5[i][0]} is describing a ${artTypes5[i]} to ${namePairs5[i][1]} and says: "I thought the ${artTypes5[i]} was <strong>${modifiers5[i]} ${sizeOrAesthetic5[i]}</strong>."`,
+        stimulus: `${namePairs5[i][0]} is describing a ${artTypes5[i]} to ${namePairs5[i][1]} and says: "I thought the ${artTypes5[i]} was ${modifiers5[i]} ${sizeOrAesthetic5[i]}."`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
         questions: [
           { text: `How ${sizeOrAesthetic5[i]} does ${namePairs5[i][0]} think the ${artTypes5[i]} is?`, name: 'valence' },
@@ -191,7 +191,7 @@ function generateStimuli() {
     const namePairs6 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs6[i][0]} is telling ${namePairs6[i][1]} about a recently-acquired ${objects6[i]} and says: "The ${objects6[i]} I got at the ${acquiringPlaces6[i]} is <strong>${modifiers6[i]} ${sizeOrAesthetic6[i]}</strong>."`,
+        stimulus: `${namePairs6[i][0]} is telling ${namePairs6[i][1]} about a recently-acquired ${objects6[i]} and says: "The ${objects6[i]} I got at the ${acquiringPlaces6[i]} is ${modifiers6[i]} ${sizeOrAesthetic6[i]}."`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
         questions: [
             { text: `How ${sizeOrAesthetic6[i]} does ${namePairs6[i][0]} think the ${objects6[i]} is?`, name: 'valence' },

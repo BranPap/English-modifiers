@@ -44,6 +44,8 @@ var stims = generateStimuli();
 // Shuffle stimuli
 stims = shuffleArray(stims);
 
+console.log(stims);
+
 
 const trial_3 = {
   timeline: [
@@ -59,47 +61,47 @@ const trial_3 = {
         var q_labels = {
           valence: {
             right: `Extremely ${jsPsych.timelineVariable('adjective')}</strong>`,
-            center: 'Somewhat',
+            center: 'Average',
             left: `Not at all ${jsPsych.timelineVariable('adjective')}</strong>`
           },
           formality: {
-            left: 'Very informal',
+            left: 'Not at all formal',
             center: 'Neutral',
-            right: 'Very formal'
+            right: 'Extremely formal'
           },
           maturity: {
-            right: 'Very mature',
-            center: 'Somewhat mature',
+            right: 'Extremely mature',
+            center: 'Average',
             left: 'Not at all mature'
           },
           coolness: {
-            right: 'Very cool',
-            center: 'Somewhat cool',
+            right: 'Extremely cool',
+            center: 'Average',
             left: 'Not at all cool'
           },
           articulateness: {
-            right: 'Very articulate',
-            center: 'Somewhat articulate',
+            right: 'Extremely articulate',
+            center: 'Average',
             left: 'Not at all articulate'
           },
           age: {
-            left: 'Very young',
-            center: 'Middle-aged',
-            right: 'Very old'
+            left: 'Much younger',
+            center: 'Around my age',
+            right: 'Much older'
           },
           friendliness: {
-            right: 'Very friendly',
-            center: 'Somewhat friendly',
+            right: 'Extremely friendly',
+            center: 'Average',
             left: 'Not at all friendly'
           },
           certainty: {
-            right: 'Very certain',
-            center: 'Somewhat certain',
+            right: 'Extremely certain',
+            center: 'Average',
             left: 'Not at all certain'
           },
           natural: {
-            right: 'Very natural',
-            center: 'Somewhat natural',
+            right: 'Completely natural',
+            center: '',
             left: 'Not at all natural' 
           }
       }
