@@ -95,14 +95,14 @@ const trial_3 = {
             left: 'Not at all friendly'
           },
           certainty: {
-            right: 'Extremely certain',
+            right: 'Extremely surprised',
             center: 'Average',
-            left: 'Not at all certain'
+            left: 'Not at all surprised'
           },
           natural: {
-            right: 'Completely natural',
+            right: 'Natural',
             center: '',
-            left: 'Not at all natural' 
+            left: 'Unnatural' 
           }
       }
       return q_labels;
