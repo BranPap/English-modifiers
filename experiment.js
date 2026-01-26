@@ -139,7 +139,7 @@ const trial_3 = {
   randomize_order: true
 };
 
-// timeline.push(trial_3);
+timeline.push(trial_3);
 
 
 

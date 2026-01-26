@@ -4,11 +4,11 @@ function generateStimuli() {
     const names = ["Jim", "Bob", "Alice", "Samantha", "Tom", "Jessica", "Karen", "Michael", "Sarah", "David", "Emily", "Daniel", "Jose", "Maria", "Belinda", "Chanel", "Chris", "Jerome", "Aisha", "Marcus", "Lin", "Sofia", "Kenji", "Fatima", "Dmitri", "Isabella", "Raj", "Emily", "Jamal", "Mei", "Diego", "Yuki", "Amara", "Liam", "Priya", "Carlos", "Fatou", "Alexander", "Zara", "Tyler", "Ling", "Mohammed"];
     const buildings = ["library", "museum", "theater", "zoo"];
     const meals = ["salad", "pizza", "pasta", "soup"];
-    const tasteAdjectives = ["delicious", "tasty", "good", "amazing", "bad", "disgusting", "hot", "scalding", "cold", "freezing"];
-    const sizeAdjectives = ["small", "minuscule", "large", "enormous", "tall", "towering", "short", "tiny"];
+    const tasteAdjectives = ["delicious", "tasty", "bad", "disgusting"];
+    const sizeAdjectives = ["small", "minuscule", "large", "enormous"];
     const aestheticAdjectives = ["pretty", "gorgeous", "hideous", "ugly"];
-    const roomAdjectives = ["pretty", "gorgeous", "hideous", "ugly", "clean", "spotless", "dirty", "filthy"];
-    const emotionAdjectives = ["happy", "ecstatic", "sad", "depressed", "angry", "furious", "excited", "thrilled"];
+    const cleanlinessAdjectives = ["clean", "spotless", "dirty", "filthy"];
+    const emotionAdjectives = ["happy", "ecstatic", "angry", "furious"];
     const artTypes = ["painting", "sculpture", "mural", "drawing"];
     const objects = ["car", "shirt", "table", "lamp"];
     const acquiringPlaces = ["estate sale", "auction", "warehouse sale", "swap meet"];
@@ -45,8 +45,7 @@ function generateStimuli() {
         { text: `How ${adjective} does ${name} think the ${object} is?`, name: 'valence' },
         { text: `How natural does ${name}'s sentence sound to you?`, name: 'natural' },
         { text: `How old do you think ${name} is relative to your age?`, name: 'age' },
-        { text: `How surprised do you think ${name} is that ${object} is ${adjective}?`, name: 'certainty' },
-        { text: `How masculine or feminine do you think ${name} is?`, name: 'gender' }
+        { text: `How surprised do you think ${name} is that ${object} is ${adjective}?`, name: 'certainty' }
       ];
     }
   
@@ -60,7 +59,7 @@ function generateStimuli() {
     const namePairs2 = getNamePairs(4);
     for (let i = 0; i < 2; i++) {
       allStimuli.push({
-        stimulus: `${namePairs2[i][0]} is telling ${namePairs2[i][1]} about a recent meal and says: <strong>"I made some ${mealTypes2[i]} for the family the other night and it turned out ${modifiers2[i]} ${adjectives2[i]}."</strong>`,
+        stimulus: `${namePairs2[i][0]} is telling ${namePairs2[i][1]} about a recent meal and says: <strong>"I made some ${mealTypes2[i]} the other night and it turned out ${modifiers2[i]} ${adjectives2[i]}."</strong>`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
         questions: createQuestions(namePairs2[i][0], adjectives2[i], 'meal'),
         name1: namePairs2[i][0],
@@ -80,7 +79,7 @@ function generateStimuli() {
     const namePairs3 = getNamePairs(4);
     for (let i = 0; i < 2; i++) {
       allStimuli.push({
-        stimulus: `${namePairs3[i][0]} is recounting to ${namePairs3[i][1]} a recent date and says: <strong>"The food I ordered at the ${mealTypes3[i]} place was ${modifiers3[i]} ${adjectives3[i]}."</strong>`,
+        stimulus: `${namePairs3[i][0]} is recounting a recent date to ${namePairs3[i][1]} and says: <strong>"The food I ordered at the ${mealTypes3[i]} place was ${modifiers3[i]} ${adjectives3[i]}."</strong>`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
         questions: createQuestions(namePairs3[i][0], adjectives3[i], 'food'),
         name1: namePairs3[i][0],
@@ -100,7 +99,7 @@ function generateStimuli() {
     const namePairs4 = getNamePairs(4);
     for (let i = 0; i < 2; i++) {
       allStimuli.push({
-        stimulus: `${namePairs4[i][0]} is telling ${namePairs4[i][1]} about the new ${buildingTypes4[i]} in town and says: <strong>"I went and saw the new ${buildingTypes4[i]} last night and it is ${modifiers4[i]} ${adjectives4[i]}."</strong>`,
+        stimulus: `${namePairs4[i][0]} is telling ${namePairs4[i][1]} about the new ${buildingTypes4[i]} in town and says: <strong>"I went and saw the new ${buildingTypes4[i]} yesterday and it is ${modifiers4[i]} ${adjectives4[i]}."</strong>`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
         questions: createQuestions(namePairs4[i][0], adjectives4[i], buildingTypes4[i]),
         name1: namePairs4[i][0],
@@ -158,7 +157,7 @@ function generateStimuli() {
     // Frame 7: date location comment
     const modifiers7 = shuffle(modifiers).slice(0, 4);
     const roomPlaces7 = shuffle(roomPlaces).slice(0, 4);
-    const adjectives7 = shuffle(roomAdjectives).slice(0, 4);
+    const adjectives7 = shuffle(cleanlinessAdjectives).slice(0, 4);
     const namePairs7 = getNamePairs(4);
     for (let i = 0; i < 2; i++) {
       allStimuli.push({
@@ -188,8 +187,7 @@ function generateStimuli() {
           { text: `How ${adjectives8[i]} was ${namePairs8[i][0]} when opening the gift?`, name: 'valence' },
           { text: `How natural does ${namePairs8[i][0]}'s sentence sound to you?`, name: 'natural' },
           { text: `How old do you think ${namePairs8[i][0]} is relative to your age?`, name: 'age' },
-          { text: `How surprised do you think ${namePairs8[i][0]} was at feeling ${adjectives8[i]}?`, name: 'certainty' },
-          { text: `How masculine or feminine do you think ${name} is?`, name: 'gender' }
+          { text: `How surprised do you think ${namePairs8[i][0]} was at feeling ${adjectives8[i]}?`, name: 'certainty' }
         ],
         name1: namePairs8[i][0],
         name2: namePairs8[i][1],
@@ -216,8 +214,7 @@ function generateStimuli() {
             { text: `How ${adjectives9[i]} was ${namePairs9[i][0]} when reading the message?`, name: 'valence' },
             { text: `How natural does ${namePairs9[i][0]}'s sentence sound to you?`, name: 'natural' },
             { text: `How old do you think ${namePairs9[i][0]} is relative to your age?`, name: 'age' },
-            { text: `How surprised do you think ${namePairs9[i][0]} was at feeling ${adjectives9[i]}?`, name: 'certainty' },
-            { text: `How masculine or feminine do you think ${name} is?`, name: 'gender' }
+            { text: `How surprised do you think ${namePairs9[i][0]} was at feeling ${adjectives9[i]}?`, name: 'certainty' }
           ],
         name1: namePairs9[i][0],
         name2: namePairs9[i][1],
@@ -249,8 +246,7 @@ function createFillerQuestions(name, adjective) {
     { text: `How ${adjective} was ${name}?`, name: 'valence' },
     { text: `How natural does ${name}'s sentence sound to you?`, name: 'natural' },
     { text: `How old do you think ${name} is relative to your age?`, name: 'age' },
-    { text: `How surprised do you think ${name} was at feeling ${adjective}?`, name: 'certainty' },
-    { text: `How masculine or feminine do you think ${name} is?`, name: 'gender' }
+    { text: `How surprised do you think ${name} was at feeling ${adjective}?`, name: 'certainty' }
   ];
 }
 
@@ -259,7 +255,7 @@ const clauseMod1 = shuffle(clausalModifiers).slice(0, 2);
 const adjs1 = shuffle(whelmingAdjs).slice(0, 2);
 const cocktails1 = shuffle(cocktails).slice(0, 2);
 const namePairs1 = getNamePairs(2);
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 1; i++) {
   const clausalPart = clauseMod1[i] ? `${clauseMod1[i]}, ` : '';
   allStimuli.push({
     stimulus: `${namePairs1[i][0]} is telling ${namePairs1[i][1]} about a new bar in town and says: <strong>"${clausalPart}I was ${adjs1[i]} by their ${cocktails1[i]}."</strong>`,
@@ -281,7 +277,7 @@ const clauseMod2 = shuffle(clausalModifiers).slice(0, 2);
 const adjs2 = shuffle(performanceAdjs).slice(0, 2);
 const genres2 = shuffle(filmGenres).slice(0, 2);
 const namePairs2f = getNamePairs(2);
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 1; i++) {
   const clausalPart = clauseMod2[i] ? `${clauseMod2[i]}, ` : '';
   allStimuli.push({
     stimulus: `${namePairs2f[i][0]} is telling ${namePairs2f[i][1]} about a recent date and says: <strong>"${clausalPart}I was ${adjs2[i]} during the ${genres2[i]} we saw."</strong>`,
@@ -303,7 +299,7 @@ const clauseMod3 = shuffle(clausalModifiers).slice(0, 2);
 const adjs3 = shuffle(vitalemotionAdjs).slice(0, 2);
 const games3 = shuffle(gameTypes).slice(0, 2);
 const namePairs3f = getNamePairs(2);
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 1; i++) {
   const clausalPart = clauseMod3[i] ? `${clauseMod3[i]}, ` : '';
   allStimuli.push({
     stimulus: `${namePairs3f[i][0]} is telling ${namePairs3f[i][1]} about a recent ${games3[i]} and says: <strong>"${clausalPart}I was feeling ${adjs3[i]} by the other players on my team."</strong>`,
@@ -325,7 +321,7 @@ const clauseMod4 = shuffle(clausalModifiers).slice(0, 2);
 const adjs4 = shuffle(emovementAdjs).slice(0, 2);
 const speeches4 = shuffle(speechTypes).slice(0, 2);
 const namePairs4f = getNamePairs(2);
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 1; i++) {
   const clausalPart = clauseMod4[i] ? `${clauseMod4[i]}, ` : '';
   allStimuli.push({
     stimulus: `${namePairs4f[i][0]} is telling ${namePairs4f[i][1]} about a recent YouTube video and says: <strong>"${clausalPart}the ${speeches4[i]} left me feeling ${adjs4[i]}."</strong>`,
@@ -347,7 +343,7 @@ const clauseMod5 = shuffle(clausalModifiers).slice(0, 2);
 const adjs5 = shuffle(emovementAdjs).slice(0, 2);
 const speeches5 = shuffle(speechTypes).slice(0, 2);
 const namePairs5f = getNamePairs(2);
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 1; i++) {
   const clausalPart = clauseMod5[i] ? `${clauseMod5[i]}, ` : '';
   allStimuli.push({
     stimulus: `${namePairs5f[i][0]} is telling ${namePairs5f[i][1]} about a recent viewing party and says: <strong>"${clausalPart}I felt ${adjs5[i]} by the ${speeches5[i]} we watched last night."</strong>`,
@@ -368,7 +364,7 @@ for (let i = 0; i < 2; i++) {
 const clauseMod6 = shuffle(clausalModifiers).slice(0, 2);
 const adjs6 = shuffle(emovementAdjs).slice(0, 2);
 const namePairs6f = getNamePairs(2);
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 1; i++) {
   const clausalPart = clauseMod6[i] ? `${clauseMod6[i]}, ` : '';
   allStimuli.push({
     stimulus: `${namePairs6f[i][0]} is telling ${namePairs6f[i][1]} about a recent date and says: <strong>"${clausalPart}I was ${adjs6[i]} by the whole conversation."</strong>`,
@@ -390,10 +386,10 @@ const clauseMod7 = shuffle(clausalModifiers).slice(0, 2);
 const adjs7 = shuffle(performanceAdjs).slice(0, 2);
 const genres7 = shuffle(filmGenres).slice(0, 2);
 const namePairs7f = getNamePairs(2);
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 1; i++) {
   const clausalPart = clauseMod7[i] ? `${clauseMod7[i]}, ` : '';
   allStimuli.push({
-    stimulus: `${namePairs7f[i][0]} is telling ${namePairs7f[i][1]} about a new movie release and says: <strong>"Have you seen the new ${genres7[i]}? ${clausalPart}I was ${adjs7[i]} the whole time."</strong>`,
+    stimulus: `${namePairs7f[i][0]} is telling ${namePairs7f[i][1]} about a new movie release and says: <strong>"Have you seen the new ${genres7[i]}? I was ${adjs7[i]} the whole time. Not at all surprised I felt that way."</strong>`,
     prompt: 'Please read the following prompt, then answer each of the questions below:',
     questions: createFillerQuestions(namePairs7f[i][0], adjs7[i]),
     name1: namePairs7f[i][0],
@@ -412,10 +408,10 @@ const clauseMod8 = shuffle(clausalModifiers).slice(0, 2);
 const adjs8 = shuffle(whelmingAdjs).slice(0, 2);
 const actors8 = shuffle(actorTypes).slice(0, 2);
 const namePairs8f = getNamePairs(2);
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 1; i++) {
   const clausalPart = clauseMod8[i] ? `${clauseMod8[i]}, ` : '';
   allStimuli.push({
-    stimulus: `${namePairs8f[i][0]} is telling ${namePairs8f[i][1]} about a recent theatrical production and says: <strong>"${clausalPart}I was ${adjs8[i]} by the lead ${actors8[i]}'s performance."</strong>`,
+    stimulus: `${namePairs8f[i][0]} is telling ${namePairs8f[i][1]} about a recent theatrical production and says: <strong>"I was ${adjs8[i]} by the lead ${actors8[i]}'s performance. I was extremely surprised!"</strong>`,
     prompt: 'Please read the following prompt, then answer each of the questions below:',
     questions: createFillerQuestions(namePairs8f[i][0], adjs8[i]),
     name1: namePairs8f[i][0],
