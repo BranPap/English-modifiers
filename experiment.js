@@ -36,7 +36,7 @@ const irb = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `<div style="max-width: 1000px; margin: 0 auto; text-align: left;">
     <h2 style="text-align: center;">Consent to Participate</h2>
-    <p>By completing this study, you are participating in research being performed by cognitive scientists in the Stanford University Department of Linguistics. ...</p>
+    <p>By completing this study, you are participating in research being performed by cognitive scientists in the Stanford University Department of Linguistics. You are currently piloting an internal version of this study; you will not be compensated for your participation, nor will your data be shared or used in any way.</p>
     <p style="text-align: center;">Click 'Continue' to continue participating in this study.</p>
   </div>`,
   choices: ['Continue'],
@@ -139,7 +139,7 @@ const trial_3 = {
   randomize_order: true
 };
 
-timeline.push(trial_3);
+// timeline.push(trial_3);
 
 
 
@@ -200,6 +200,8 @@ const demoSurvey = {
   </style>
 
   <div id='survey-container'>
+  <h2>Demographic Survey</h2>
+  <h3>All responses are anonymous, confidential, and optional.</h3>
 
     <div>
       <p>Did you read the instructions and do you think you did the task correctly?</p>
@@ -249,17 +251,21 @@ const demoSurvey = {
     </div>
 
     <div>
-      <p>Location:</p>
-      <select name='Location'>
-        <option value='null'> </option>
-        <option value='West Coast'>West Coast</option>
-        <option value='Midwest'>Midwest</option>
-        <option value='South'>South</option>
-        <option value='East Coast'>East Coast</option>
-        <option value='Great Plains'>Great Plains</option>
-        <option value='Hawaii'>Hawaii</option>
-        <option value='Alaska'>Alaska</option>
-      </select>
+      <h3>Where do you currently live?</h3>
+      <p>City:</p>
+      <input type="text" name="City" placeholder="Enter city">
+      
+      <p>State:</p>
+      <input type="text" name="State" placeholder="Enter state">
+    </div>
+
+    <div>
+      <h3>Where have you spent the most time in your life?</h3>
+      <p>City:</p>
+      <input type="text" name="City2" placeholder="Enter city">
+      
+      <p>State:</p>
+      <input type="text" name="State2" placeholder="Enter state">
     </div>
 
     <div>
