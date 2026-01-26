@@ -1,6 +1,6 @@
 function generateStimuli() {
     // critical
-    const modifiers = ["pretty", "fairly", "very", "so", "really", "truly", ""];
+    const modifiers = ["truly", "honestly", "really", "very", "pretty", "so", ""];
     const names = ["Jim", "Bob", "Alice", "Samantha", "Tom", "Jessica", "Karen", "Michael", "Sarah", "David", "Emily", "Daniel", "Jose", "Maria", "Belinda", "Chanel", "Chris", "Jerome", "Aisha", "Marcus", "Lin", "Sofia", "Kenji", "Fatima", "Dmitri", "Isabella", "Raj", "Emily", "Jamal", "Mei", "Diego", "Yuki", "Amara", "Liam", "Priya", "Carlos", "Fatou", "Alexander", "Zara", "Tyler", "Ling", "Mohammed"];
     const buildings = ["library", "museum", "theater", "zoo"];
     const meals = ["salad", "pizza", "pasta", "soup"];
@@ -45,7 +45,8 @@ function generateStimuli() {
         { text: `How ${adjective} does ${name} think the ${object} is?`, name: 'valence' },
         { text: `How natural does ${name}'s sentence sound to you?`, name: 'natural' },
         { text: `How old do you think ${name} is relative to your age?`, name: 'age' },
-        { text: `How surprised do you think ${name} is that ${object} is ${adjective}?`, name: 'certainty' }
+        { text: `How surprised do you think ${name} is that ${object} is ${adjective}?`, name: 'certainty' },
+        { text: `How masculine or feminine do you think ${name} is?`, name: 'gender' }
       ];
     }
   
@@ -187,7 +188,8 @@ function generateStimuli() {
           { text: `How ${adjectives8[i]} was ${namePairs8[i][0]} when opening the gift?`, name: 'valence' },
           { text: `How natural does ${namePairs8[i][0]}'s sentence sound to you?`, name: 'natural' },
           { text: `How old do you think ${namePairs8[i][0]} is relative to your age?`, name: 'age' },
-          { text: `How surprised do you think ${namePairs8[i][0]} was at feeling ${adjectives8[i]}?`, name: 'certainty' }
+          { text: `How surprised do you think ${namePairs8[i][0]} was at feeling ${adjectives8[i]}?`, name: 'certainty' },
+          { text: `How masculine or feminine do you think ${name} is?`, name: 'gender' }
         ],
         name1: namePairs8[i][0],
         name2: namePairs8[i][1],
@@ -214,7 +216,8 @@ function generateStimuli() {
             { text: `How ${adjectives9[i]} was ${namePairs9[i][0]} when reading the message?`, name: 'valence' },
             { text: `How natural does ${namePairs9[i][0]}'s sentence sound to you?`, name: 'natural' },
             { text: `How old do you think ${namePairs9[i][0]} is relative to your age?`, name: 'age' },
-            { text: `How surprised do you think ${namePairs9[i][0]} was at feeling ${adjectives9[i]}?`, name: 'certainty' }
+            { text: `How surprised do you think ${namePairs9[i][0]} was at feeling ${adjectives9[i]}?`, name: 'certainty' },
+            { text: `How masculine or feminine do you think ${name} is?`, name: 'gender' }
           ],
         name1: namePairs9[i][0],
         name2: namePairs9[i][1],
@@ -246,7 +249,8 @@ function createFillerQuestions(name, adjective) {
     { text: `How ${adjective} was ${name}?`, name: 'valence' },
     { text: `How natural does ${name}'s sentence sound to you?`, name: 'natural' },
     { text: `How old do you think ${name} is relative to your age?`, name: 'age' },
-    { text: `How surprised do you think ${name} was at feeling ${adjective}?`, name: 'certainty' }
+    { text: `How surprised do you think ${name} was at feeling ${adjective}?`, name: 'certainty' },
+    { text: `How masculine or feminine do you think ${name} is?`, name: 'gender' }
   ];
 }
 

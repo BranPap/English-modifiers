@@ -1,11 +1,3 @@
-var queryString = window.location.search;
-var urlParams = new URLSearchParams(queryString);
-var prolificID = urlParams.get('PROLIFIC_PID')   // ID unique to the participant
-var studyID = urlParams.get('STUDY_ID')          // ID unique to the study
-var sessionID = urlParams.get('SESSION_ID')      // ID unique to the particular submission
-const subject_id = jsPsych.randomization.randomID(10);
-const filename = `${subject_id}_${prolificID}.csv`;
-
 // Utils //
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -25,6 +17,14 @@ const jsPsych = initJsPsych({
     jsPsych.data.displayData('csv');
   }
 });
+
+var queryString = window.location.search;
+var urlParams = new URLSearchParams(queryString);
+var prolificID = urlParams.get('PROLIFIC_PID')   // ID unique to the participant
+var studyID = urlParams.get('STUDY_ID')          // ID unique to the study
+var sessionID = urlParams.get('SESSION_ID')      // ID unique to the particular submission
+const subject_id = jsPsych.randomization.randomID(10);
+const filename = `${subject_id}_${prolificID}.csv`;
 
 let timeline = [];
 
@@ -111,6 +111,11 @@ const trial_3 = {
             right: 'Natural',
             center: '',
             left: 'Unnatural' 
+          },
+          gender: {
+            right: 'Extremely feminine',
+            center: 'Neutral',
+            left: 'Extremely masculine'
           }
       }
       return q_labels;
@@ -228,6 +233,32 @@ const demoSurvey = {
         <option value='Some college'>Some college</option>
         <option value='Graduated college'>Graduated college</option>
         <option value='Hold a higher degree'>Hold a higher degree</option>
+      </select>
+    </div>
+
+    <div>
+      <p>Race/Ethnicity:</p>
+      <select name='ethnicity'>
+        <option value='null'> </option>
+        <option value='Black'>Black</option>
+        <option value='White'>White / Caucasian</option>
+        <option value='API'>Asian / Pacific Islander </option>
+        <option value='Latinx'>Hispanic / Latinx</option>
+        <option value='Indigenous'>Native American / Alaskan</option>
+      </select>
+    </div>
+
+    <div>
+      <p>Location:</p>
+      <select name='Location'>
+        <option value='null'> </option>
+        <option value='West Coast'>West Coast</option>
+        <option value='Midwest'>Midwest</option>
+        <option value='South'>South</option>
+        <option value='East Coast'>East Coast</option>
+        <option value='Great Plains'>Great Plains</option>
+        <option value='Hawaii'>Hawaii</option>
+        <option value='Alaska'>Alaska</option>
       </select>
     </div>
 
