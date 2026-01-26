@@ -1,3 +1,11 @@
+var queryString = window.location.search;
+var urlParams = new URLSearchParams(queryString);
+var prolificID = urlParams.get('PROLIFIC_PID')   // ID unique to the participant
+var studyID = urlParams.get('STUDY_ID')          // ID unique to the study
+var sessionID = urlParams.get('SESSION_ID')      // ID unique to the particular submission
+const subject_id = jsPsych.randomization.randomID(10);
+const filename = `${subject_id}_${prolificID}.csv`;
+
 // Utils //
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -265,15 +273,15 @@ const demoSurvey = {
 timeline.push(demoSurvey);
 
 
-// const save_data = {
-//   type: jsPsychPipe,
-//   action: "save",
-//   experiment_id: "", // ADD EXPERIMENT ID
-//   filename: filename,
-//   data_string: ()=>jsPsych.data.get().csv()
-// };
+const save_data = {
+  type: jsPsychPipe,
+  action: "save",
+  experiment_id: "3ZL0jQ70aZqW", // ADD EXPERIMENT ID
+  filename: filename,
+  data_string: ()=>jsPsych.data.get().csv()
+};
 
-// timeline.push(save_data);
+timeline.push(save_data);
 
 
 // FINAL FUNCTION CALL //
