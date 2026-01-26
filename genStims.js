@@ -1,14 +1,20 @@
 function generateStimuli() {
     const modifiers = ["pretty", "fairly", "very", "so", "really", "truly", ""];
-    const names = ["Jim", "Bob", "Alice", "Samantha", "Tom", "Jessica", "Karen", "Michael", "Sarah", "David", "Emily", "Daniel", "Jose", "Maria", "Belinda", "Chanel", "Chris", "Jerome"];
-    const buildings = ["restaurant", "library", "museum", "theater", "zoo", "bar"];
-    const meals = ["burger", "pizza", "pasta", "seafood", "sushi", "dumpling"];
-    const tasteAdjectives = ["delicious", "tasty", "scrumptious", "yummy"];
-    const sizeAdjectives = ["gigantic", "huge", "massive", "enormous", "miniscule", "tiny", "small", "little"];
-    const aestheticAdjectives = ["beautiful", "gorgeous", "hideous", "ugly", "stunning", "attractive", "lame", "boring"];
-    const artTypes = ["painting", "sculpture", "mural", "drawing", "photograph"];
-    const objects = ["car", "dress", "motocycle", "shirt", "table", "lamp"];
+    const names = ["Jim", "Bob", "Alice", "Samantha", "Tom", "Jessica", "Karen", "Michael", "Sarah", "David", "Emily", "Daniel", "Jose", "Maria", "Belinda", "Chanel", "Chris", "Jerome", "Aisha", "Marcus", "Lin", "Sofia", "Kenji", "Fatima", "Dmitri", "Isabella", "Raj", "Emily", "Jamal", "Mei", "Diego", "Yuki", "Amara", "Liam", "Priya", "Carlos", "Fatou", "Alexander", "Zara", "Tyler", "Ling", "Mohammed"];
+    const buildings = ["library", "museum", "theater", "zoo"];
+    const meals = ["salad", "pizza", "pasta", "soup"];
+    const tasteAdjectives = ["delicious", "tasty", "good", "amazing", "bad", "disgusting", "hot", "scalding", "cold", "freezing"];
+    const sizeAdjectives = ["small", "minuscule", "large", "enormous", "tall", "towering", "short", "tiny"];
+    const aestheticAdjectives = ["pretty", "gorgeous", "hideous", "ugly"];
+    const roomAdjectives = ["pretty", "gorgeous", "hideous", "ugly", "clean", "spotless", "dirty", "filthy"];
+    const emotionAdjectives = ["happy", "ecstatic", "sad", "depressed", "angry", "furious", "excited", "thrilled"];
+    const artTypes = ["painting", "sculpture", "mural", "drawing"];
+    const objects = ["car", "shirt", "table", "lamp"];
     const acquiringPlaces = ["estate sale", "auction", "warehouse sale", "swap meet"];
+    const giftItems = ["book", "quilt", "sweater", "gift card", "candle"];
+    const roomPlaces = ["bedroom", "living room", "kitchen", "bathroom"];
+    const dramaTypes = ["friend group", "workplace", "family", "school"];
+    const communicationTypes = ["text message", "email", "social media post", "letter"];
   
     // Helper function to shuffle array
     function shuffle(array) {
@@ -32,62 +38,34 @@ function generateStimuli() {
       return pairs;
     }
   
-    const allStimuli = [];
-  
-    // Frame 1: burger at restaurant
-    const modifiers1 = shuffle(modifiers).slice(0, 4);
-    const tasteAdj1 = shuffle(tasteAdjectives);
-    const namePairs1 = getNamePairs(4);
-    for (let i = 0; i < 4; i++) {
-      allStimuli.push({
-        stimulus: `${namePairs1[i][0]} is telling ${namePairs1[i][1]} about a new restaurant in town and says: "The burger I had last night was ${modifiers1[i]} ${tasteAdj1[i]}."`,
-        prompt: 'Please read the following prompt, then answer each of the questions below:',
-        questions: [
-          { text: `How ${tasteAdj1[i]} does ${namePairs1[i][0]} think the burger is?`, name: 'valence' },
-          { text: `How natural does ${namePairs1[i][0]}'s sentence sound to you?`, name: 'natural' },
-          { text: 'How formal does the bolded part of the sentence sound to you?', name: 'formality' },
-          { text: `How mature do you think ${namePairs1[i][0]} is?`, name: 'maturity' },
-          { text: `How cool do you think ${namePairs1[i][0]} is?`, name: 'coolness' },
-          { text: `How articulate do you think ${namePairs1[i][0]} is?`, name: 'articulateness' },
-          { text: `How old do you think ${namePairs1[i][0]} is?`, name: 'age' },
-          { text: `How friendly do you think ${namePairs1[i][0]} is?`, name: 'friendliness' },
-          { text: `How certain do you think ${namePairs1[i][0]} is in the bolded statement?`, name: 'certainty' }
-        ],
-        name1: namePairs1[i][0],
-        name2: namePairs1[i][1],
-        modifier: modifiers1[i],
-        adjective: tasteAdj1[i],
-        object: 'burger',
-        frame: 1,
-        frame_type: 'restaurant_burger'
-      });
+    // Helper function to create standardized questions
+    function createQuestions(name, adjective, object) {
+      return [
+        { text: `How ${adjective} does ${name} think the ${object} is?`, name: 'valence' },
+        { text: `How natural does ${name}'s sentence sound to you?`, name: 'natural' },
+        { text: `How old do you think ${name} is relative to your age?`, name: 'age' },
+        { text: `How surprised do you think ${name} is that ${object} is ${adjective}?`, name: 'certainty' }
+      ];
     }
   
-    // Frame 2: meal at meals place
+    const allStimuli = [];
+
+  
+    // Frame 2: cooked meal for family
     const modifiers2 = shuffle(modifiers).slice(0, 4);
-    const tasteAdj2 = shuffle(tasteAdjectives);
-    const meals2 = shuffle(meals).slice(0, 4);
+    const adjectives2 = shuffle(tasteAdjectives).slice(0, 4);
+    const mealTypes2 = shuffle(meals).slice(0, 4);
     const namePairs2 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs2[i][0]} is telling ${namePairs2[i][1]} about a recent meal at a new ${meals2[i]} place and says: "The meal I had at the ${meals2[i]} place was ${modifiers2[i]} ${tasteAdj2[i]}."`,
+        stimulus: `${namePairs2[i][0]} is telling ${namePairs2[i][1]} about a recent meal and says: <strong>"I made some ${mealTypes2[i]} for the family the other night and it turned out ${modifiers2[i]} ${adjectives2[i]}."</strong>`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
-        questions: [
-          { text: `How ${tasteAdj2[i]} does ${namePairs2[i][0]} think the meal is?`, name: 'valence' },
-          { text: 'How natural does the bolded part of the sentence sound to you?', name: 'natural' },
-          { text: 'How formal does the bolded part of the sentence sound to you?', name: 'formality' },
-          { text: `How mature do you think ${namePairs2[i][0]} is?`, name: 'maturity' },
-          { text: `How cool do you think ${namePairs2[i][0]} is?`, name: 'coolness' },
-          { text: `How articulate do you think ${namePairs2[i][0]} is?`, name: 'articulateness' },
-          { text: `How old do you think ${namePairs2[i][0]} is?`, name: 'age' },
-          { text: `How friendly do you think ${namePairs2[i][0]} is?`, name: 'friendliness' },
-          { text: `How certain do you think ${namePairs2[i][0]} is in the bolded statement?`, name: 'certainty' }
-        ],
+        questions: createQuestions(namePairs2[i][0], adjectives2[i], 'meal'),
         name1: namePairs2[i][0],
         name2: namePairs2[i][1],
         modifier: modifiers2[i],
-        adjective: tasteAdj2[i],
-        object: meals2[i],
+        adjective: adjectives2[i],
+        object: mealTypes2[i],
         frame: 2,
         frame_type: 'meal_at_place'
       });
@@ -95,29 +73,19 @@ function generateStimuli() {
   
     // Frame 3: food at meals place on date
     const modifiers3 = shuffle(modifiers).slice(0, 4);
-    const tasteAdj3 = shuffle(tasteAdjectives);
-    const meals3 = shuffle(meals).slice(0, 4);
+    const adjectives3 = shuffle(tasteAdjectives).slice(0, 4);
+    const mealTypes3 = shuffle(meals).slice(0, 4);
     const namePairs3 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs3[i][0]} is recounting to ${namePairs3[i][1]} a recent date and says: "The food I ordered at the ${meals3[i]} place was ${modifiers3[i]} ${tasteAdj3[i]}."`,
+        stimulus: `${namePairs3[i][0]} is recounting to ${namePairs3[i][1]} a recent date and says: <strong>"The food I ordered at the ${mealTypes3[i]} place was ${modifiers3[i]} ${adjectives3[i]}."</strong>`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
-        questions: [
-          { text: `How ${tasteAdj3[i]} does ${namePairs3[i][0]} think the food is?`, name: 'valence' },
-          { text: 'How natural does the bolded part of the sentence sound to you?', name: 'natural' },
-          { text: 'How formal does the bolded part of the sentence sound to you?', name: 'formality' },
-          { text: `How mature do you think ${namePairs3[i][0]} is?`, name: 'maturity' },
-          { text: `How cool do you think ${namePairs3[i][0]} is?`, name: 'coolness' },
-          { text: `How articulate do you think ${namePairs3[i][0]} is?`, name: 'articulateness' },
-          { text: `How old do you think ${namePairs3[i][0]} is?`, name: 'age' },
-          { text: `How friendly do you think ${namePairs3[i][0]} is?`, name: 'friendliness' },
-          { text: `How certain do you think ${namePairs3[i][0]} is in the bolded statement?`, name: 'certainty' }
-        ],
+        questions: createQuestions(namePairs3[i][0], adjectives3[i], 'food'),
         name1: namePairs3[i][0],
         name2: namePairs3[i][1],
         modifier: modifiers3[i],
-        adjective: tasteAdj3[i],
-        object: meals3[i],
+        adjective: adjectives3[i],
+        object: mealTypes3[i],
         frame: 3,
         frame_type: 'date_food'
       });
@@ -125,29 +93,19 @@ function generateStimuli() {
   
     // Frame 4: new building in town
     const modifiers4 = shuffle(modifiers).slice(0, 4);
-    const buildings4 = shuffle(buildings).slice(0, 4);
-    const sizeOrAesthetic4 = shuffle([...sizeAdjectives, ...aestheticAdjectives]).slice(0, 4);
+    const buildingTypes4 = shuffle(buildings).slice(0, 4);
+    const adjectives4 = shuffle([...sizeAdjectives, ...aestheticAdjectives]).slice(0, 4);
     const namePairs4 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs4[i][0]} is telling ${namePairs4[i][1]} about the new ${buildings4[i]} in town and says: "I went and saw the new ${buildings4[i]} last night and it is ${modifiers4[i]} ${sizeOrAesthetic4[i]}."`,
+        stimulus: `${namePairs4[i][0]} is telling ${namePairs4[i][1]} about the new ${buildingTypes4[i]} in town and says: <strong>"I went and saw the new ${buildingTypes4[i]} last night and it is ${modifiers4[i]} ${adjectives4[i]}."</strong>`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
-        questions: [
-          { text: `How ${sizeOrAesthetic4[i]} does ${namePairs4[i][0]} think the ${buildings4[i]} is?`, name: 'valence' },
-          { text: 'How natural does the bolded part of the sentence sound to you?', name: 'natural' },
-          { text: 'How formal does the bolded part of the sentence sound to you?', name: 'formality' },
-          { text: `How mature do you think ${namePairs4[i][0]} is?`, name: 'maturity' },
-          { text: `How cool do you think ${namePairs4[i][0]} is?`, name: 'coolness' },
-          { text: `How articulate do you think ${namePairs4[i][0]} is?`, name: 'articulateness' },
-          { text: `How old do you think ${namePairs4[i][0]} is?`, name: 'age' },
-          { text: `How friendly do you think ${namePairs4[i][0]} is?`, name: 'friendliness' },
-          { text: `How certain do you think ${namePairs4[i][0]} is in the bolded statement?`, name: 'certainty' }
-        ],
+        questions: createQuestions(namePairs4[i][0], adjectives4[i], buildingTypes4[i]),
         name1: namePairs4[i][0],
         name2: namePairs4[i][1],
         modifier: modifiers4[i],
-        adjective: sizeOrAesthetic4[i],
-        object: buildings4[i],
+        adjective: adjectives4[i],
+        object: buildingTypes4[i],
         frame: 4,
         frame_type: 'new_building'
       });
@@ -156,27 +114,17 @@ function generateStimuli() {
     // Frame 5: describing artTypes
     const modifiers5 = shuffle(modifiers).slice(0, 4);
     const artTypes5 = shuffle(artTypes).slice(0, 4);
-    const sizeOrAesthetic5 = shuffle([...sizeAdjectives, ...aestheticAdjectives]).slice(0, 4);
+    const adjectives5 = shuffle(aestheticAdjectives).slice(0, 4);
     const namePairs5 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs5[i][0]} is describing a ${artTypes5[i]} to ${namePairs5[i][1]} and says: "I thought the ${artTypes5[i]} was ${modifiers5[i]} ${sizeOrAesthetic5[i]}."`,
+        stimulus: `${namePairs5[i][0]} is describing a ${artTypes5[i]} to ${namePairs5[i][1]} and says: <strong>"I thought the ${artTypes5[i]} was ${modifiers5[i]} ${adjectives5[i]}."</strong>`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
-        questions: [
-          { text: `How ${sizeOrAesthetic5[i]} does ${namePairs5[i][0]} think the ${artTypes5[i]} is?`, name: 'valence' },
-          { text: 'How natural does the bolded part of the sentence sound to you?', name: 'natural' },
-          { text: 'How formal does the bolded part of the sentence sound to you?', name: 'formality' },
-          { text: `How mature do you think ${namePairs5[i][0]} is?`, name: 'maturity' },
-          { text: `How cool do you think ${namePairs5[i][0]} is?`, name: 'coolness' },
-          { text: `How articulate do you think ${namePairs5[i][0]} is?`, name: 'articulateness' },
-          { text: `How old do you think ${namePairs5[i][0]} is?`, name: 'age' },
-          { text: `How friendly do you think ${namePairs5[i][0]} is?`, name: 'friendliness' },
-          { text: `How certain do you think ${namePairs5[i][0]} is in the bolded statement?`, name: 'certainty' }
-        ],
+        questions: createQuestions(namePairs5[i][0], adjectives5[i], artTypes5[i]),
         name1: namePairs5[i][0],
         name2: namePairs5[i][1],
         modifier: modifiers5[i],
-        adjective: sizeOrAesthetic5[i],
+        adjective: adjectives5[i],
         object: artTypes5[i],
         frame: 5,
         frame_type: 'art_description'
@@ -185,35 +133,99 @@ function generateStimuli() {
   
     // Frame 6: recently-acquired object
     const modifiers6 = shuffle(modifiers).slice(0, 4);
-    const objects6 = shuffle(objects).slice(0, 4);
-    const acquiringPlaces6 = shuffle(acquiringPlaces);
-    const sizeOrAesthetic6 = shuffle([...sizeAdjectives, ...aestheticAdjectives]).slice(0, 4);
+    const objectTypes6 = shuffle(objects).slice(0, 4);
+    const acquiringPlaces6 = shuffle(acquiringPlaces).slice(0, 4);
+    const adjectives6 = shuffle([...sizeAdjectives, ...aestheticAdjectives]).slice(0, 4);
     const namePairs6 = getNamePairs(4);
     for (let i = 0; i < 4; i++) {
       allStimuli.push({
-        stimulus: `${namePairs6[i][0]} is telling ${namePairs6[i][1]} about a recently-acquired ${objects6[i]} and says: "The ${objects6[i]} I got at the ${acquiringPlaces6[i]} is ${modifiers6[i]} ${sizeOrAesthetic6[i]}."`,
+        stimulus: `${namePairs6[i][0]} is telling ${namePairs6[i][1]} about a recently-acquired ${objectTypes6[i]} and says: <strong>"The ${objectTypes6[i]} I got at the ${acquiringPlaces6[i]} is ${modifiers6[i]} ${adjectives6[i]}."</strong>`,
         prompt: 'Please read the following prompt, then answer each of the questions below:',
-        questions: [
-            { text: `How ${sizeOrAesthetic6[i]} does ${namePairs6[i][0]} think the ${objects6[i]} is?`, name: 'valence' },
-            { text: 'How natural does the bolded part of the sentence sound to you?', name: 'natural' },
-            { text: 'How formal does the bolded part of the sentence sound to you?', name: 'formality' },
-            { text: `How mature do you think ${namePairs6[i][0]} is?`, name: 'maturity' },
-            { text: `How cool do you think ${namePairs6[i][0]} is?`, name: 'coolness' },
-            { text: `How articulate do you think ${namePairs6[i][0]} is?`, name: 'articulateness' },
-            { text: `How old do you think ${namePairs6[i][0]} is?`, name: 'age' },
-            { text: `How friendly do you think ${namePairs6[i][0]} is?`, name: 'friendliness' },
-            { text: `How certain do you think ${namePairs6[i][0]} is in the bolded statement?`, name: 'certainty' }
-        ],
+        questions: createQuestions(namePairs6[i][0], adjectives6[i], objectTypes6[i]),
         name1: namePairs6[i][0],
         name2: namePairs6[i][1],
         modifier: modifiers6[i],
-        adjective: sizeOrAesthetic6[i],
-        object: objects6[i],
+        adjective: adjectives6[i],
+        object: objectTypes6[i],
         acquiring_place: acquiringPlaces6[i],
         frame: 6,
         frame_type: 'acquired_object'
       });
     }
-  
+
+    // Frame 7: date location comment
+    const modifiers7 = shuffle(modifiers).slice(0, 4);
+    const roomPlaces7 = shuffle(roomPlaces).slice(0, 4);
+    const adjectives7 = shuffle(roomAdjectives).slice(0, 4);
+    const namePairs7 = getNamePairs(4);
+    for (let i = 0; i < 4; i++) {
+      allStimuli.push({
+        stimulus: `${namePairs7[i][0]} is telling ${namePairs7[i][1]} about the house of a recent date and says: <strong>"The ${roomPlaces7[i]} was ${modifiers7[i]} ${adjectives7[i]}."</strong>`,
+        prompt: 'Please read the following prompt, then answer each of the questions below:',
+        questions: createQuestions(namePairs7[i][0], adjectives7[i], roomPlaces7[i]),
+        name1: namePairs7[i][0],
+        name2: namePairs7[i][1],
+        modifier: modifiers7[i],
+        adjective: adjectives7[i],
+        object: roomPlaces7[i],
+        frame: 7,
+        frame_type: 'date_location'
+      });
+    }
+
+    // Frame 8: birthday gift emotion
+    const modifiers8 = shuffle(modifiers).slice(0, 4);
+    const giftItems8 = shuffle(giftItems).slice(0, 4);
+    const adjectives8 = shuffle(emotionAdjectives).slice(0, 4);
+    const namePairs8 = getNamePairs(4);
+    for (let i = 0; i < 4; i++) {
+      allStimuli.push({
+        stimulus: `${namePairs8[i][0]} is telling ${namePairs8[i][1]} about a recently-received birthday gift and says: <strong>"I got a ${giftItems8[i]} for my birthday and when I opened it I was ${modifiers8[i]} ${adjectives8[i]}."</strong>`,
+        prompt: 'Please read the following prompt, then answer each of the questions below:',
+        questions: [
+          { text: `How ${adjectives8[i]} was ${namePairs8[i][0]} when opening the gift?`, name: 'valence' },
+          { text: `How natural does ${namePairs8[i][0]}'s sentence sound to you?`, name: 'natural' },
+          { text: `How old do you think ${namePairs8[i][0]} is relative to your age?`, name: 'age' },
+          { text: `How surprised do you think ${namePairs8[i][0]} was at feeling ${adjectives8[i]}?`, name: 'certainty' }
+        ],
+        name1: namePairs8[i][0],
+        name2: namePairs8[i][1],
+        modifier: modifiers8[i],
+        adjective: adjectives8[i],
+        object: giftItems8[i],
+        frame: 8,
+        frame_type: 'birthday_gift_emotion'
+      });
+    }
+
+    // Frame 9: dramaComment 
+    const modifiers9 = shuffle(modifiers).slice(0, 4);
+    const adjectives9 = shuffle(emotionAdjectives).slice(0, 4);
+    const namePairs9 = getNamePairs(4);
+    const thirdNames9 = shuffle(names).slice(0, 4);
+    const dramaTypes9 = shuffle(dramaTypes).slice(0, 4);
+    const communicationTypes9 = shuffle(communicationTypes).slice(0, 4);
+    for (let i = 0; i < 4; i++) {
+      allStimuli.push({
+        stimulus: `${namePairs9[i][0]} is telling ${namePairs9[i][1]} about a some recent ${dramaTypes9[i]} drama and says: <strong>"When I read ${thirdNames9[i]}'s ${communicationTypes9[i]} I was ${modifiers9[i]} ${adjectives9[i]}."</strong>`,
+        prompt: 'Please read the following prompt, then answer each of the questions below:',
+        questions: [
+            { text: `How ${adjectives9[i]} was ${namePairs9[i][0]} when reading the message?`, name: 'valence' },
+            { text: `How natural does ${namePairs9[i][0]}'s sentence sound to you?`, name: 'natural' },
+            { text: `How old do you think ${namePairs9[i][0]} is relative to your age?`, name: 'age' },
+            { text: `How surprised do you think ${namePairs8[i][0]} was at feeling ${adjectives8[i]}?`, name: 'certainty' }
+          ],
+        name1: namePairs9[i][0],
+        name2: namePairs9[i][1],
+        modifier: modifiers9[i],
+        adjective: adjectives9[i],
+        object: communicationTypes9[i],
+        third_name: thirdNames9[i],
+        drama_type: dramaTypes9[i],
+        frame: 9,
+        frame_type: 'drama_comment'
+      });
+    }
+
     return allStimuli;
   }
