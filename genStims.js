@@ -45,7 +45,7 @@ function generateStimuli() {
         { text: `How ${adjective} does ${name} think the ${object} is?`, name: 'valence' },
         { text: `How natural does ${name}'s sentence sound to you?`, name: 'natural' },
         { text: `How old do you think ${name} is relative to your age?`, name: 'age' },
-        { text: `How surprised do you think ${name} is that ${object} is ${adjective}?`, name: 'certainty' }
+        { text: `How surprised do you think ${name} is that the ${object} is ${adjective}?`, name: 'certainty' }
       ];
     }
   
@@ -95,7 +95,7 @@ function generateStimuli() {
     // Frame 4: new building in town
     const modifiers4 = shuffle(modifiers).slice(0, 4);
     const buildingTypes4 = shuffle(buildings).slice(0, 4);
-    const adjectives4 = shuffle([...sizeAdjectives, ...aestheticAdjectives]).slice(0, 4);
+    const adjectives4 = shuffle(sizeAdjectives).slice(0, 4);
     const namePairs4 = getNamePairs(4);
     for (let i = 0; i < 2; i++) {
       allStimuli.push({
@@ -136,7 +136,7 @@ function generateStimuli() {
     const modifiers6 = shuffle(modifiers).slice(0, 4);
     const objectTypes6 = shuffle(objects).slice(0, 4);
     const acquiringPlaces6 = shuffle(acquiringPlaces).slice(0, 4);
-    const adjectives6 = shuffle([...sizeAdjectives, ...aestheticAdjectives]).slice(0, 4);
+    const adjectives6 = shuffle([...sizeAdjectives, ...aestheticAdjectives, ...cleanlinessAdjectives]).slice(0, 4);
     const namePairs6 = getNamePairs(4);
     for (let i = 0; i < 2; i++) {
       allStimuli.push({
@@ -280,7 +280,7 @@ const namePairs2f = getNamePairs(2);
 for (let i = 0; i < 1; i++) {
   const clausalPart = clauseMod2[i] ? `${clauseMod2[i]}, ` : '';
   allStimuli.push({
-    stimulus: `${namePairs2f[i][0]} is telling ${namePairs2f[i][1]} about a recent date and says: <strong>"${clausalPart}I was ${adjs2[i]} during the ${genres2[i]} we saw."</strong>`,
+    stimulus: `${namePairs2f[i][0]} is telling ${namePairs2f[i][1]} about a recent date and says: <strong>"${clausalPart}I was ${adjs2[i]} by the ${genres2[i]} we saw."</strong>`,
     prompt: 'Please read the following prompt, then answer each of the questions below:',
     questions: createFillerQuestions(namePairs2f[i][0], adjs2[i]),
     name1: namePairs2f[i][0],
