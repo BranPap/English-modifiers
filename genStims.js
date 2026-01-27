@@ -45,7 +45,7 @@ function generateStimuli() {
         { text: `How ${adjective} does ${name} think the ${object} is?`, name: 'valence' },
         { text: `How natural does ${name}'s sentence sound to you?`, name: 'natural' },
         { text: `How old do you think ${name} is relative to your age?`, name: 'age' },
-        { text: `How surprised do you think ${name} is that the ${object} is ${adjective}?`, name: 'certainty' }
+        { text: `How confident does ${name} sound?`, name: 'certainty' }
       ];
     }
   

@@ -1,0 +1,54 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(jsonlite)
+library(stringr)
+
+positiveAdjectives = c("delicious", "tasty", "large", "enormous", "pretty", "gorgeous", "clean", "spotless", "happy", "ecstatic")
+negativeAdjectives = c("bad", "disgusting", "small", "miniscule", "hideous", "ugly", "dirty", "filthy", "angry", "furious")
+baseAdjectives = c("tasty", "large", "pretty", "clean", "happy", "bad", "small", "ugly", "dirty", "angry")
+extremeAdjectives = c("delicious", "enormous", "gorgeous", "spotless", "ecstatic", "disgusting", "minuscule", "hideous", "filthy", "furious")
+subjectiveAdjectives = c("delicious", "tasty", "pretty", "gorgeous", "bad", "disgusting", "hideous", "ugly", "angry", "furious")
+objectiveAdjectives = c("large", "enormous", "clean", "spotless", "small", "miniscule", "dirty", "filthy")
+
+```
+
+```{r}
+testData <- read_csv("qv4w1xej9s_null.csv")
+
+df <- testData %>%
+  filter(!is.na(responses)) %>% 
+  mutate(parsed = lapply(responses, fromJSON)) %>%
+  tidyr::unnest_wider(parsed) %>%
+  select(-responses) %>% 
+  mutate(stimType = ifelse(frame %in% c(1,2,3,4,5,6,7,8,9),"critical", "filler")) %>% 
+  mutate(combo = ifelse(is.na(modifier), adjective, str_c(modifier," ",adjective))) %>% 
+  mutate(valence = ifelse(adjective %in% positiveAdjectives, "positive", "negative"),
+         extremity = ifelse(adjective %in% extremeAdjectives, "extreme", "base"),
+         objectivity = ifelse(adjective %in% objectiveAdjectives, "objective", "subjective")) %>% 
+  mutate(FullCondition = str_c(valence, " ", extremity, " ", objectivity)) %>% 
+  mutate(modifier = ifelse(is.na(modifier), "bare", modifier))
+```
+
+```{r}
+df %>% 
+  filter(stimType == "critical") %>% 
+  group_by(modifier,extremity) %>% 
+  summarize(meanNaturalness = mean(natural)) %>% 
+  ggplot(aes(x=modifier, y=meanNaturalness, color = extremity)) +
+  geom_point(size = 3) + 
+  theme_bw() + 
+  coord_flip() + 
+  ylim(1,7) + 
+  labs(
+    y = "Mean naturalness rating",
+    x = "Modifier",
+    color = "Adjective extremity"
+  ) + 
+  scale_color_manual(values = c("#aff56a", "#ffa56a"))
+```
+
